@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- View form de trajet -->
+   <record model="ir.ui.view" id="trajet_form_view">
+            <field name="name">trajet.form</field>
+            <field name="model">covoiturage.trajet</field>
+            <field name="arch" type="xml">
+                <form string="trajet Form">  
+                    <header> 
+                        <field name="etat" widget="statusbar"/>
+                        <button string= "Conferme" attrs="{'invisible': [('etat', 'in', ['Conferme', 'Annulé','Terminé'])]}" class='oe_highlight'
+                                type="object" name="act_conferme" />
+                        <button string= "Annuler" attrs = "{'invisible': [('etat', 'in' , ['Annulé','Terminé'])]}"  class='oe_highlight'
+                                type="object" name="act_annuler" />
+                        <button string= "Terminer" attrs = "{'invisible': [('etat', 'in', ['Proposer','Annulé','Terminé'])]}"  class='oe_highlight'
+                                type="object" name="act_terminer" />
+                        
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>  
+                            <field name="date" widget="date"/>
+                            <field name="vehicule"/>
+                            <field name="point_depart"/>
+                            <field name="point_arrivee"/>
+                            <field name="note"/>
+                        </group>                        
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- View list (tree) de trajet -->
+        <record model="ir.ui.view" id="trajet_tree_view">
+            <field name="name">trajet.tree</field>
+            <field name="model">covoiturage.trajet</field>
+            <field name="arch" type="xml">
+                <tree string="trajet Tree">
+                    <field name="name"/>  
+                    <field name="date"/>
+                    <field name="point_depart"/>
+                    <field name="point_arrivee"/>                    
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="trajet_search_view">
+            <field name="name">trajet.search</field>
+            <field name="model">covoiturage.trajet</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>                
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_trajet_calendar">
+        <field name="name">trajet.calendar</field>
+        <field name="model">covoiturage.trajet</field>
+        <field name="arch" type="xml">
+        <calendar string="trajets" date_start="date" color="etat" hide_time="true" event_limit="20" quick_add="False">
+                <field name="name" />
+            </calendar>
+        </field>
+        </record>
+
+
+        <!-- window action -->
+       
+        <record model="ir.actions.act_window" id="trajet_list_action">
+            <field name="name">Trajets</field>
+            <field name="res_model">covoiturage.trajet</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Create the first trajet
+                </p>
+            </field>
+        </record>
+
+        <!-- top level menu: no parent -->
+        <menuitem id="main_covoiturage_menu" name="Gestion des trajets"/>
+     
+        <menuitem id="covoiturage_menu" name="Gestion des trajets"
+                  parent="main_covoiturage_menu"/>
+        
+        <menuitem id="trajet_menu" name="Trajets" 
+                  parent="covoiturage_menu" action="trajet_list_action"/>
+
+
+
+
+        <!-- sign form view -->
+        <record model="ir.ui.view" id="signalement_form_view">
+            <field name="name">signalement.form</field>
+            <field name="model">covoiturage.signalement</field>
+            <field name="arch" type="xml">
+                <form string="signalement Form">
+                    <sheet>                
+                        <group>
+                            <field name="name"/>
+                            <field name="trajet"/>
+                            <field name="cause"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- sig list(tree) view -->
+        <record model="ir.ui.view" id="signalement_tree_view">
+            <field name="name">signalement.tree</field>
+            <field name="model">covoiturage.signalement</field>
+            <field name="arch" type="xml">
+                <tree string="signalement Tree">
+                    <field name="name"/>
+                    <field name="trajet"/>
+                    <field name="cause"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="signalement_search_view">
+            <field name="name">signalement.search</field>
+            <field name="model">covoiturage.signalement</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>                
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="signalement_list_action">
+            <field name="name">signalement</field>
+            <field name="res_model">covoiturage.signalement</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="signalement_menu" name="Signalement"
+                  parent="covoiturage_menu"
+                  action="signalement_list_action"/>
+</odoo>
