@@ -1,0 +1,79 @@
+<odoo>
+
+    <record id="report_trajet" model="ir.actions.report">
+        <field name="name">trajet Report</field>
+        <field name="model">covoiturage.trajet</field>
+        <field name="report_type">qweb-pdf</field>  
+        <field name="report_name">covoiturage.report_trajet_view</field>
+        <field name="report_file">covoiturage.report_trajet_view</field>
+        <field name="binding_model_id" ref="model_covoiturage_trajet"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_trajet_view">
+        <t t-call="web.html_container">
+        <t t-call="web.external_layout">
+
+		<h2>Lists des trajet</h2>    
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th><strong>Nom</strong></th>
+                        <th><strong>Date</strong></th>
+                        <th><strong>Point depart</strong></th>
+                        <th><strong>Point arrivee</strong></th>  
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="docs" t-as="trajet">
+                            <tr >
+                                <td><t t-esc="trajet.name"/></td>
+                                <td><t t-esc="trajet.date"/></td>
+                                <td><t t-esc="trajet.point_depart"/></td>
+                                <td><t t-esc="trajet.point_arrivee"/></td>
+                            </tr>
+                        </t>
+                </tbody>
+            </table>     
+        </t>              
+        </t>
+    </template>
+
+
+    <record id="report_signalement" model="ir.actions.report">
+        <field name="name">signalement Report</field>
+        <field name="model">covoiturage.signalement</field>
+        <field name="report_type">qweb-pdf</field>  
+        <field name="report_name">covoiturage.report_signalement_view</field>
+        <field name="report_file">covoiturage.report_signalement_view</field>
+        <field name="binding_model_id" ref="model_covoiturage_signalement"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_signalement_view">
+        <t t-call="web.html_container">
+        <t t-call="web.external_layout">
+
+		<h2>Lists des signalement</h2>    
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th><strong>Nom</strong></th>
+                        <th><strong>Trajet</strong></th>
+                        <th><strong>cause</strong></th>  
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="docs" t-as="signalement">
+                            <tr >
+                                <td><t t-esc="signalement.name"/></td>
+                                <td><t t-esc="signalement.trajet"/></td>
+                                <td><t t-esc="signalement.cause"/></td>
+                            </tr>
+                        </t>
+                </tbody>
+            </table>     
+        </t>              
+        </t>
+    </template>
+</odoo>

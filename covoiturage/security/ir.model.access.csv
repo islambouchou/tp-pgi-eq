@@ -1,0 +1,6 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+trajet_manager,trajet manager,model_covoiturage_trajet,group_manager,1,1,1,1
+signalement_manager,signalement manager,model_covoiturage_signalement,group_manager,1,1,1,1
+
+trajet_read_all,trajet all,model_covoiturage_trajet,,1,0,0,0
+signalement_read_all,signalement all,model_covoiturage_signalement,,1,0,0,0
